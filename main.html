@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>МБОО Социальная Инициатива – бесплатная помощь</title>
+    <!-- Шрифты Google Fonts: Open Sans (основной) + Montserrat для акцентов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (бесплатная иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f8ff; /* очень светлый голубой фон */
+            color: #1a1a2c;
+            line-height: 1.5;
+        }
+
+        /* основные цвета: голубой (primary) и красный (акцент) */
+        :root {
+            --blue-light: #e6f2ff;
+            --blue-bright: #1e81d9;   /* основной голубой */
+            --blue-dark: #0f4c7a;
+            --red-bright: #e63946;     /* красный акцент */
+            --red-dark: #b71c1c;
+            --white: #ffffff;
+            --gray-bg: #f9fafc;
+            --text-dark: #0a2a44;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* типовые кнопки */
+        .btn {
+            display: inline-block;
+            background: var(--red-bright);
+            color: white;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 8px 16px rgba(230, 57, 70, 0.2);
+        }
+        .btn:hover {
+            background: #c92e3b;
+            transform: scale(1.02);
+            box-shadow: 0 12px 20px rgba(230, 57, 70, 0.3);
+        }
+        .btn-phone {
+            background: var(--blue-bright);
+            box-shadow: 0 5px 15px rgba(30, 129, 217, 0.3);
+        }
+        .btn-phone:hover {
+            background: #1565a7;
+        }
+
+        /* шапка */
+        .top-bar {
+            background: var(--blue-dark);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .hotline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hotline i {
+            color: var(--red-bright);
+            font-size: 1.2rem;
+        }
+        .hotline a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .hotline a:hover {
+            text-decoration: underline;
+        }
+        .city-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 4px 15px;
+            border-radius: 30px;
+        }
+        .city-selector i {
+            color: var(--red-bright);
+        }
+        .city-selector select {
+            background: transparent;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .city-selector select option {
+            color: var(--text-dark);
+        }
+
+        /* основная шапка с логотипом */
+        .header-main {
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0,40,80,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .header-main .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .logo-img img {
+            height: 65px;
+            width: auto;
+            max-width: 200px;
+            display: block;
+        }
+        .org-name h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--blue-dark);
+        }
+        .org-name span {
+            color: var(--red-bright);
+            font-size: 1rem;
+            font-weight: 600;
+            display: block;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .header-contacts {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .header-contacts a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue-light);
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: var(--blue-dark);
+            font-weight: 700;
+            transition: 0.2s;
+            border: 1px solid rgba(30,129,217,0.3);
+        }
+        .header-contacts a i {
+            color: var(--red-bright);
+            font-size: 1.3rem;
+        }
+        .header-contacts a:hover {
+            background: var(--blue-bright);
+            color: white;
+            border-color: var(--blue-bright);
+        }
+        .header-contacts a:hover i {
+            color: white;
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #d9eaff 100%);
+            padding: 50px 0;
+        }
+        .hero .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 30px;
+        }
+        .hero-text {
+            flex: 2 1 400px;
+        }
+        .hero-text h2 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--blue-dark);
+            line-height: 1.2;
+        }
+        .hero-highlight {
+            color: var(--red-bright);
+            border-bottom: 3px solid var(--red-bright);
+        }
+        .hero-description {
+            font-size: 1.2rem;
+            margin: 25px 0 20px;
+            color: #1f3a5f;
+        }
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 25px;
+        }
+        .stat-item {
+            background: white;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-weight: 700;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.03);
+            border-left: 5px solid var(--red-bright);
+        }
+
+        /* блок Бесплатно/Добровольно/Анонимно (три карточки) */
+        .principles {
+            padding: 60px 0;
+            background: white;
+        }
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .principle-card {
+            background: var(--blue-light);
+            border-radius: 30px;
+            padding: 35px 20px;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid rgba(30,129,217,0.2);
+        }
+        .principle-card i {
+            font-size: 3.5rem;
+            color: var(--red-bright);
+            margin-bottom: 20px;
+        }
+        .principle-card h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--blue-dark);
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .principle-card p {
+            color: #2a405c;
+        }
+        /* Блок с зависимостями (виды помощи) */
+        .help-types {
+            background: var(--gray-bg);
+            padding: 50px 0;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--blue-dark);
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .section-title span {
+            color: var(--red-bright);
+        }
+        .checkbox-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px 35px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--blue-dark);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(30,129,217,0.3);
+            flex: 0 1 auto;
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--red-bright);
+            transform: scale(1.1);
+            pointer-events: none; /* только визуальный элемент */
+        }
+
+        /* Блок о программе: христианские ценности, духовно-нравственное */
+        .about-program {
+            padding: 60px 0;
+            background: white;
+        }
+        .program-feature {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .feature-text {
+            flex: 1 1 300px;
+        }
+        .feature-text h3 {
+            font-size: 1.8rem;
+            color: var(--blue-dark);
+            margin-bottom: 15px;
+        }
+        .feature-text p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .red-quote {
+            background: #ffeeee;
+            border-left: 5px solid var(--red-bright);
+            padding: 20px 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* поддержка семьи и выпускников */
+        .support-family {
+            background: linear-gradient(to right, #e6f2ff, #ffffff);
+            padding: 50px 0;
+        }
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minspec(300px, 1fr));
+            gap: 30px;
+        }
+        .support-card {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,50,100,0.1);
+            border-top: 5px solid var(--red-bright);
+        }
+        .support-card i {
+            font-size: 2.5rem;
+            color: var(--blue-bright);
+            margin-bottom: 15px;
+        }
+        .support-card h4 {
+            font-size: 1.7rem;
+            color: var(--blue-dark);
+            font-weight: 700;
+        }
+
+        /* блок "испробовали всё" + преимущества */
+        .trial-block {
+            padding: 50px 0;
+            background: var(--blue-light);
+        }
+        .trial-inner {
+            background: var(--blue-dark);
+            color: white;
+            border-radius: 50px;
+            padding: 40px;
+            text-align: center;
+        }
+        .trial-inner h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .trial-inner p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+        .trial-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Контакты и обратный звонок */
+        .contact-section {
+            padding: 60px 0;
+            background: white;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .contact-info {
+            background: #f2f9ff;
+            border-radius: 30px;
+            padding: 30px;
+        }
+        .contact-info h4 {
+            font-size: 1.8rem;
+            color: var(--blue-dark);
+            margin-bottom: 20px;
+        }
+        .contact-links {
+            list-style: none;
+        }
+        .contact-links li {
+            margin-bottom: 20px;
+        }
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--blue-dark);
+            background: white;
+            padding: 15px 25px;
+            border-radius: 60px;
+            width: 100%;
+            border: 1px solid var(--blue-bright);
+            transition: 0.2s;
+        }
+        .contact-links a i {
+            color: var(--red-bright);
+            font-size: 1.8rem;
+            width: 30px;
+        }
+        .contact-links a:hover {
+            background: var(--blue-bright);
+            color: white;
+            border-color: var(--blue-bright);
+        }
+        .contact-links a:hover i {
+            color: white;
+        }
+
+        .callback-form {
+            background: var(--blue-bright);
+            border-radius: 30px;
+            padding: 35px;
+            color: white;
+        }
+        .callback-form h4 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+        }
+        .form-group button {
+            background: var(--red-bright);
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            width: 100%;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .form-group button:hover {
+            background: #b71c1c;
+        }
+        .small-note {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* футер */
+        .footer {
+            background: #0f2c4a;
+            color: #cdddee;
+            padding: 30px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: var(--red-bright);
+            text-decoration: none;
+        }
+        .footer .website-link {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* адаптация */
+        @media (max-width: 700px) {
+            .hero-text h2 { font-size: 2rem; }
+            .header-main .container { flex-direction: column; align-items: start; }
+            .org-name h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Верхняя плашка с круглосуточной линией и выбором города -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="hotline">
+                <i class="fas fa-phone-alt"></i>
+                <span>Круглосуточная горячая линия:</span>
+                <a href="tel:+79268181144">+7 (926) 818-11-44</a>
+                <span style="margin:0 5px">|</span>
+                <a href="tel:+79998684404">+7 (999) 868-44-04</a>
+            </div>
+            <div class="city-selector">
+                <i class="fas fa-map-marker-alt"></i>
+                <select>
+                    <option>Подольск</option>
+                    <option>Лобня</option>
+                    <option>Другой город</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Шапка с логотипом МБОО Социальная инициатива -->
+     <div class="header-main">
+        <div class="container">
+            <div class="logo-area">
+                <div class="img src=Социальная Инициатива.png">
+                    <!-- Логотип из прикреплённого файла IMG_3690.jpeg (описание) -->
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Crect width='200' height='80' fill='%231e81d9'/%3E%3Ctext x='20' y='48' fill='white' font-family='Arial' font-weight='bold' font-size='32'%3EСоц%3C/text%3E%3Ctext x='110' y='60' fill='%23e63946' font-family='Arial' font-weight='bold' font-size='40'%3EИ%3C/text%3E%3C/svg%3E"
+                         alt="МБОО Социальная инициатива" style="height:70px; background: none;">
+                </div>
+                <div class="org-name">
+                    <h1>МБОО Социальная Инициатива</h1>
+                    <span>Помощь людям</span>
+                </div>
+            </div>
+            <div class="header-contacts">
+                <a href="tel:+79268181144"><i class="fas fa-phone"></i> +7 (926) 818-11-44</a>
+                <a href="tel:+79998684404"><i class="fas fa-phone"></i> +7 (999) 868-44-04</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero: главный посыл, бесплатная помощь -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-text">
+                <h2>Бесплатная помощь <span class="hero-highlight">людям</span><br>в трудной жизненной ситуации</h2>
+                <p class="hero-description">Анонимно. Добровольно. По всей России.</p>
+                <p>Малообеспеченные семьи, люди с зависимостями, социальная реабилитация. Оказываем содействие в улучшении материального положения, защите семьи и пропаганде здорового образа жизни.</p>
+                <div class="hero-stats">
+                    <div class="stat-item"><i class="fas fa-heart" style="color:var(--red-bright);"></i> Более 20 лет помощи</div>
+                    <div class="stat-item"><i class="fas fa-users" style="color:var(--red-bright);"></i> Тысячи выпускников</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок Бесплатно / Добровольно / Анонимно -->
+    <section class="principles">
+        <div class="container">
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <i class="fas fa-ruble-sign"></i>
+                    <h3>Бесплатно</h3>
+                    <p>Помощь и реабилитация полностью бесплатны. Финансирование за счёт пожертвований и благотворительных фондов.</p>
+                </div>
+                <div class="principle-card">
+                    <i class="fas fa-hand-peace"></i>
+                    <h3>Добровольно</h3>
+                    <p>Только личное согласие. Мы не удерживаем принудительно, реабилитация — осознанный выбор.</p>
+                </div>
+                <div class="principle-card">
+                    <i class="fas fa-incognito"></i>
+                    <h3>Анонимно</h3>
+                    <p>Полная анонимность и конфиденциальность для каждого обратившегося.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Виды зависимостей (чекбоксы) + другие проблемы -->
+    <section class="help-types">
+        <div class="container">
+            <h2 class="section-title">С какими <span>трудностями</span> помогаем</h2>
+            <div class="checkbox-grid">
+                <div class="checkbox-item"><input type="checkbox" checked disabled> Наркотическая</div>
+                <div class="checkbox-item"><input type="checkbox" checked disabled> Алкогольная</div>
+                <div class="checkbox-item"><input type="checkbox" checked disabled> Химическая (ПАВ)</div>
+                <div class="checkbox-item"><input type="checkbox" checked disabled> Компьютерная</div>
+                <div class="checkbox-item"><input type="checkbox" checked disabled> От лекарств</div>
+                <div class="checkbox-item"><input type="checkbox" checked disabled> Игровая (ставки)</div>
+                <div class="checkbox-item"><input type="checkbox" checked disabled> Кризис семьи</div>
+                <div class="checkbox-item"><input type="checkbox" checked disabled> Малообеспеченность</div>
+            </div>
+            <p style="text-align:center; margin-top:30px;"><strong>Комплексная безмедикаментозная помощь, восстановление физического и психологического здоровья.</strong></p>
+        </div>
+    </section>
+
+    <!-- Духовно-нравственное просвещение, христианские ценности -->
+    <section class="about-program">
+        <div class="container">
+            <h2 class="section-title">Наша программа: <span>духовно-нравственное</span> восстановление</h2>
+            <p style="font-size:1.2rem; max-width:900px; margin:0 auto; text-align:center;">МБОО Социальная инициатива не является церковной структурой, но в основе реабилитации — христианские ценности и духовно-нравственное просвещение. Мы помогаем вернуть человека к полноценной жизни, отказ от зависимостей и восстановление моральных ориентиров.</p>
+            <div class="program-feature">
+                <div class="feature-text">
+                    <h3>Упор на духовные корни</h3>
+                    <p>Причины кризисов часто лежат в душевной сфере. Наши специалисты (включая доктора психологических наук) помогают обрести внутреннюю опору.</p>
+                    <div class="red-quote">
+                        <i class="fas fa-quote-left" style="color:var(--red-bright); opacity:0.6;"></i> Мы не считаем зависимых неизлечимо больными. Работаем с первопричинами, возвращаем радость реальной жизни.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Поддержка семьи и выпускников -->
+    <section class="support-family">
+        <div class="container">
+            <div class="two-columns" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:30px;">
+                <div class="support-card">
+                    <i class="fas fa-family"></i>
+                    <h4>Поддержка семьи</h4>
+                    <p>На протяжении всей реабилитации и после мы поддерживаем близких зависимых. Помогаем наладить отношения, восстановить доверие.</p>
+                </div>
+                <div class="support-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h4>После центра</h4>
+                    <p>Не бросаем выпускников: помощь в учёбе, поиске работы, организации дела. Отрываем от старого круга общения.</p>
+                </div>
+                <div class="support-card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h4>Социальная адаптация</h4>
+                    <p>Помогаем вернуться в общество, восстановить документы, найти жильё и работу.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок "испробовали всё, но ничего не помогает" + преимущества -->
+    <section class="trial-block">
+        <div class="container">
+            <div class="trial-inner">
+                <h3>Вы испробовали всё, но ничего не помогает?</h3>
+                <p>Попробуйте нашу бесплатную реабилитацию. Добровольная, анонимная, с опорой на христианские ценности.</p>
+                <div class="trial-buttons">
+                    <a href="tel:+79268181144" class="btn"><i class="fas fa-phone"></i> +7 (926) 818-11-44</a>
+                    <a href="tel:+79998684404" class="btn btn-phone"><i class="fas fa-phone"></i> +7 (999) 868-44-04</a>
+                </div>
+                <p style="margin-top:20px;"><i class="fas fa-lock"></i> Анонимно. Не держим принудительно.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как с нами связаться: номера, почта, обратный звонок -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь <span>с нами</span></h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h4>Контакты</h4>
+                    <ul class="contact-links">
+                        <li><a href="tel:+79268181144"><i class="fas fa-phone-alt"></i> +7 (926) 818-11-44</a></li>
+                        <li><a href="tel:+79998684404"><i class="fas fa-phone-alt"></i> +7 (999) 868-44-04</a></li>
+                        <li><a href="mailto:v0van1891@yandex.ru"><i class="fas fa-envelope"></i> v0van1891@yandex.ru</a></li>
+                    </ul>
+                    <p style="margin-top:20px;"><i class="fas fa-clock"></i> Круглосуточно, бесплатно, анонимно.</p>
+                </div>
+                <div class="callback-form">
+                    <h4>Закажите обратный звонок</h4>
+                    <p>Оставьте телефон — специалист свяжется с вами</p>
+                    <form id="callbackForm" onsubmit="event.preventDefault(); alert('Спасибо! Мы перезвоним вам в ближайшее время.');">
+                        <div class="form-group">
+                            <input type="tel" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit"><i class="fas fa-phone"></i> Заказать звонок</button>
+                        </div>
+                        <p class="small-note"><i class="fas fa-check-circle"></i> Нажимая, вы соглашаетесь на обработку данных</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер с сайтом и специалистами -->
+    <footer class="footer">
+        <div class="container">
+            <p>МБОО «Социальная Инициатива» — помощь людям в трудной жизненной ситуации</p>
+            <p class="website-link"><a href="#">МБОО Социальная Инициатива</a> (внешний ресурс)</p>
+            <p>© 2026 | Все направления помощи бесплатны и анонимны</p>
+        </div>
+    </footer>
+</body>
+</html>
